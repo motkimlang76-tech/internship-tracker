@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dashboard - Internship Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <a class="back-link" href="{{ url_for('home') }}">Back to home</a>
+
+      <section class="panel">
+        <p class="eyebrow dark">Step 7</p>
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Dashboard</h1>
+            <p class="page-intro">
+              These numbers come from SQLite using SQL count queries.
+            </p>
+          </div>
+          <a class="button" href="{{ url_for('new_job') }}">Add job</a>
+        </div>
+      </section>
+
+      <section class="stats-grid" aria-label="Application status counts">
+        <article class="stat-card total-stat">
+          <p>Total jobs</p>
+          <strong>{{ total_jobs }}</strong>
+        </article>
+
+        {% for item in status_counts %}
+          <article class="stat-card">
+            <p>{{ item.label }}</p>
+            <strong>{{ item.count }}</strong>
+          </article>
+        {% endfor %}
+      </section>
+
+      <section class="panel recent-panel">
+        <div class="page-header">
+          <div>
+            <h2 class="section-title">Recent jobs</h2>
+            <p class="page-intro">The newest 5 jobs in your tracker.</p>
+          </div>
+          <a class="edit-button" href="{{ url_for('jobs') }}">View all</a>
+        </div>
+
+        {% if recent_jobs %}
+          <div class="mini-list">
+            {% for job in recent_jobs %}
+              <article class="mini-job">
+                <div>
+                  <h3>{{ job.company }}</h3>
+                  <p>{{ job.role }}</p>
+                  {% if job.deadline %}
+                    <p class="deadline">Deadline: {{ job.deadline }}</p>
+                  {% endif %}
+                  {% if job.notes %}
+                    <p class="mini-note">{{ job.notes }}</p>
+                  {% endif %}
+                </div>
+                <span class="status">{{ job.status }}</span>
+              </article>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="empty-state">
+            <h2>No jobs yet</h2>
+            <p>Add your first internship application to see dashboard numbers.</p>
+          </div>
+        {% endif %}
+      </section>
+    </main>
+  </body>
+</html>

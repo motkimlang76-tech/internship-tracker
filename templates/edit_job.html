@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Job - Internship Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <main class="page">
+      <a class="back-link" href="{{ url_for('jobs') }}">Back to jobs</a>
+
+      <section class="panel">
+        <p class="eyebrow dark">Step 5</p>
+        <h1 class="page-title">Edit job</h1>
+        <p class="page-intro">
+          This form loads one job from SQLite, lets you change it, then saves
+          the update back to the database.
+        </p>
+
+        <form class="job-form" method="post">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" value="{{ job.company }}" required>
+
+          <label for="role">Role</label>
+          <input id="role" name="role" type="text" value="{{ job.role }}" required>
+
+          <label for="location">Location</label>
+          <input id="location" name="location" type="text" value="{{ job.location or '' }}">
+
+          <label for="status">Status</label>
+          <select id="status" name="status">
+            <option value="Saved" {% if job.status == "Saved" %}selected{% endif %}>Saved</option>
+            <option value="Applied" {% if job.status == "Applied" %}selected{% endif %}>Applied</option>
+            <option value="Interview" {% if job.status == "Interview" %}selected{% endif %}>Interview</option>
+            <option value="Offer" {% if job.status == "Offer" %}selected{% endif %}>Offer</option>
+          </select>
+
+          <label for="deadline">Deadline</label>
+          <input id="deadline" name="deadline" type="date" value="{{ job.deadline or '' }}">
+
+          <label for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="5">{{ job.notes or '' }}</textarea>
+
+          <button class="button form-button" type="submit">Save changes</button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

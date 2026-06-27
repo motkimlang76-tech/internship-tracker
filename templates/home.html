@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Internship Tracker</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css') }}"
+    />
+  </head>
+  <body>
+    <main class="page">
+      <section class="hero">
+        <p class="eyebrow">Full-stack beginner project</p>
+        <h1>My Internship Tracker</h1>
+        <p class="intro">
+          Track companies, roles, status, deadlines, and notes while you apply
+          for internships.
+        </p>
+
+        <div class="actions">
+          <a class="button" href="{{ url_for('new_job') }}">Add first job</a>
+          <a class="button button-secondary" href="{{ url_for('dashboard') }}">Dashboard</a>
+          <a class="button button-secondary" href="{{ url_for('jobs') }}">View jobs</a>
+        </div>
+      </section>
+
+      <section class="preview" aria-label="Project features">
+        <article>
+          <h2>Save Jobs</h2>
+          <p>Keep every internship application in one place.</p>
+        </article>
+        <article>
+          <h2>Track Status</h2>
+          <p>Move each job from saved to applied, interview, or offer.</p>
+        </article>
+        <article>
+          <h2>Learn Full-Stack</h2>
+          <p>Practice routes, forms, database work, and UI design.</p>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
