@@ -2,6 +2,17 @@
 
 A beginner full-stack project built with Python, Flask, HTML, CSS, and SQLite.
 
+This app helps a student or job seeker track internship and job applications in one place.
+
+## Tech Stack
+
+- Python
+- Flask
+- SQLite
+- HTML
+- CSS
+- Jinja templates
+
 ## Features
 
 - Add internship or job applications.
@@ -10,7 +21,25 @@ A beginner full-stack project built with Python, Flask, HTML, CSS, and SQLite.
 - Filter applications by status.
 - Edit an application.
 - Delete an application.
+- Save a company website link.
 - See a dashboard with totals and recent jobs.
+
+## App Flow
+
+```text
+HTML form -> Flask route -> SQLite database -> Flask template -> HTML page
+```
+
+Example add-job flow:
+
+```text
+User fills the Add Job form
+-> Browser sends POST data to Flask
+-> Flask reads request.form
+-> Flask inserts the job into SQLite
+-> Flask redirects to the jobs page
+-> jobs.html displays the saved job
+```
 
 ## First Run
 
@@ -56,6 +85,13 @@ http://127.0.0.1:5000
 - `commit()` saves database changes.
 - `home.html`, `jobs.html`, and other template files are the page structure.
 - `styles.css` controls the design.
+
+## Project Explanation
+
+I built an Internship Application Tracker using Flask, SQLite, HTML, and CSS.
+The app can add, view, search, filter, edit, and delete internship applications.
+I learned how HTML forms send data to Flask, how Flask saves data to SQLite,
+and how templates show database data back to the user.
 
 ## Learning Notes
 

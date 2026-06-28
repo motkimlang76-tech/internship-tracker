@@ -46,6 +46,73 @@ Examples:
 /jobs      -> jobs()      -> jobs.html
 ```
 
+## Full-Stack Flow / Flow សំខាន់
+
+```text
+HTML ផ្ញើ data ទៅ Flask។
+Flask save data ទៅ SQLite។
+Flask យក data ពី SQLite។
+HTML បង្ហាញ data ឲ្យ user។
+```
+
+Short version:
+
+```text
+Form -> Flask -> SQLite -> Flask -> HTML page
+```
+
+## Add Job Flow
+
+```text
+User បញ្ចូល form
+-> ចុច Save job
+-> Flask route /jobs/new ទទួល data
+-> Flask ប្រើ request.form យក data
+-> INSERT ទៅ SQLite
+-> redirect ទៅ /jobs
+-> jobs.html បង្ហាញ job ថ្មី
+```
+
+## Edit Job Flow
+
+```text
+User ចុច Edit
+-> Flask route /jobs/<id>/edit យក job មួយពី SQLite
+-> edit_job.html បង្ហាញ data ចាស់
+-> User ប្តូរ data
+-> Flask UPDATE job នៅ SQLite
+-> redirect ទៅ /jobs
+-> jobs.html បង្ហាញ data ថ្មី
+```
+
+## Delete Job Flow
+
+```text
+User ចុច Delete
+-> Browser សួរ confirm
+-> Form ផ្ញើ POST ទៅ /jobs/<id>/delete
+-> Flask DELETE job ពី SQLite
+-> redirect ទៅ /jobs
+-> jobs.html មិនបង្ហាញ job នោះទៀត
+```
+
+## Company Website Feature
+
+To add a new field like `website`, we changed these parts:
+
+- Database: add `website` column.
+- Add form: add `input name="website"`.
+- Flask add route: read `request.form.get("website")` and INSERT it.
+- Edit form: show old website value.
+- Flask edit route: UPDATE `website`.
+- Jobs/dashboard pages: show `{{ job.website }}` as a link.
+
+ចាំ pattern នេះ:
+
+```text
+New field = database + form + Flask save/update + display
+```
+
 ## Database Words
 
 - `SELECT` reads data.
