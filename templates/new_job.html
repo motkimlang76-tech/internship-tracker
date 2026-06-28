@@ -11,36 +11,67 @@
       <a class="back-link" href="{{ url_for('home') }}">Back to home</a>
 
       <section class="panel">
-        <p class="eyebrow dark">Step 2</p>
+        <p class="eyebrow dark">New application</p>
         <h1 class="page-title">Add a job</h1>
         <p class="page-intro">
-          This form sends data from the browser to Flask, then Flask saves it
-          in the SQLite database.
+          Save a company, role, deadline, and notes for one opportunity.
         </p>
+
+        {% if error %}
+          <p class="form-error">{{ error }}</p>
+        {% endif %}
 
         <form class="job-form" method="post">
           <label for="company">Company</label>
-          <input id="company" name="company" type="text" placeholder="Example: ABC Tech" required>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            value="{{ form_data.company }}"
+            placeholder="Example: ABC Tech"
+            required
+          >
 
           <label for="role">Role</label>
-          <input id="role" name="role" type="text" placeholder="Example: Frontend Intern" required>
+          <input
+            id="role"
+            name="role"
+            type="text"
+            value="{{ form_data.role }}"
+            placeholder="Example: Frontend Intern"
+            required
+          >
 
           <label for="location">Location</label>
-          <input id="location" name="location" type="text" placeholder="Example: Phnom Penh">
+          <input
+            id="location"
+            name="location"
+            type="text"
+            value="{{ form_data.location }}"
+            placeholder="Example: Phnom Penh"
+          >
 
           <label for="website">Company website</label>
-          <input id="website" name="website" type="url" placeholder="https://example.com">
+          <input
+            id="website"
+            name="website"
+            type="text"
+            inputmode="url"
+            value="{{ form_data.website }}"
+            placeholder="https://example.com"
+          >
 
           <label for="status">Status</label>
           <select id="status" name="status">
-            <option value="Saved">Saved</option>
-            <option value="Applied">Applied</option>
-            <option value="Interview">Interview</option>
-            <option value="Offer">Offer</option>
+            {% for status in statuses %}
+              <option value="{{ status }}" {% if form_data.status == status %}selected{% endif %}>
+                {{ status }}
+              </option>
+            {% endfor %}
           </select>
 
           <label for="deadline">Deadline</label>
-          <input id="deadline" name="deadline" type="date">
+          <input id="deadline" name="deadline" type="date" value="{{ form_data.deadline }}">
 
           <label for="notes">Notes</label>
           <textarea
@@ -48,9 +79,9 @@
             name="notes"
             rows="5"
             placeholder="Example: Sent CV today. Follow up next week."
-          ></textarea>
+          >{{ form_data.notes }}</textarea>
 
-          <button class="button form-button" type="submit">Save job</button>
+          <button class="button form-button" type="submit">Save application</button>
         </form>
       </section>
     </main>

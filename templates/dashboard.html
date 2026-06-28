@@ -11,12 +11,12 @@
       <a class="back-link" href="{{ url_for('home') }}">Back to home</a>
 
       <section class="panel">
-        <p class="eyebrow dark">Step 7</p>
+        <p class="eyebrow dark">Overview</p>
         <div class="page-header">
           <div>
             <h1 class="page-title">Dashboard</h1>
             <p class="page-intro">
-              These numbers come from SQLite using SQL count queries.
+              See your application totals and the latest jobs in your tracker.
             </p>
           </div>
           <a class="button" href="{{ url_for('new_job') }}">Add job</a>
@@ -63,7 +63,7 @@
                     <p class="mini-note">{{ job.notes }}</p>
                   {% endif %}
                 </div>
-                <span class="status">{{ job.status }}</span>
+                <span class="status status-{{ job.status|lower }}">{{ job.status }}</span>
               </article>
             {% endfor %}
           </div>

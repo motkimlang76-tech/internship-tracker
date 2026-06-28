@@ -11,36 +11,68 @@
       <a class="back-link" href="{{ url_for('jobs') }}">Back to jobs</a>
 
       <section class="panel">
-        <p class="eyebrow dark">Step 5</p>
+        <p class="eyebrow dark">Update application</p>
         <h1 class="page-title">Edit job</h1>
         <p class="page-intro">
-          This form loads one job from SQLite, lets you change it, then saves
-          the update back to the database.
+          Update the status, deadline, notes, or company details for this job.
         </p>
+
+        {% if error %}
+          <p class="form-error">{{ error }}</p>
+        {% endif %}
 
         <form class="job-form" method="post">
           <label for="company">Company</label>
-          <input id="company" name="company" type="text" value="{{ job.company }}" required>
+          <input
+            id="company"
+            name="company"
+            type="text"
+            value="{{ job.company }}"
+            required
+          >
 
           <label for="role">Role</label>
-          <input id="role" name="role" type="text" value="{{ job.role }}" required>
+          <input
+            id="role"
+            name="role"
+            type="text"
+            value="{{ job.role }}"
+            required
+          >
 
           <label for="location">Location</label>
-          <input id="location" name="location" type="text" value="{{ job.location or '' }}">
+          <input
+            id="location"
+            name="location"
+            type="text"
+            value="{{ job.location or '' }}"
+          >
 
           <label for="website">Company website</label>
-          <input id="website" name="website" type="url" value="{{ job.website or '' }}">
+          <input
+            id="website"
+            name="website"
+            type="text"
+            inputmode="url"
+            value="{{ job.website or '' }}"
+          >
 
           <label for="status">Status</label>
           <select id="status" name="status">
-            <option value="Saved" {% if job.status == "Saved" %}selected{% endif %}>Saved</option>
-            <option value="Applied" {% if job.status == "Applied" %}selected{% endif %}>Applied</option>
-            <option value="Interview" {% if job.status == "Interview" %}selected{% endif %}>Interview</option>
-            <option value="Offer" {% if job.status == "Offer" %}selected{% endif %}>Offer</option>
+            {% for status in statuses %}
+              <option value="{{ status }}" {% if job.status == status %}selected{% endif %}>
+                {{ status }}
+              </option>
+            {% endfor %}
           </select>
 
           <label for="deadline">Deadline</label>
-          <input id="deadline" name="deadline" type="date" value="{{ job.deadline or '' }}">
+          <input
+            id="deadline"
+            name="deadline"
+            type="date"
+            value="{{ job.deadline or '' }}"
+          >
 
           <label for="notes">Notes</label>
           <textarea id="notes" name="notes" rows="5">{{ job.notes or '' }}</textarea>

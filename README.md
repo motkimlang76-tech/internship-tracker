@@ -17,11 +17,12 @@ This app helps a student or job seeker track internship and job applications in 
 
 - Add internship or job applications.
 - View all saved applications.
-- Search applications by company or role.
+- Search applications by company, role, or location.
 - Filter applications by status.
 - Edit an application.
 - Delete an application.
 - Save a company website link.
+- Track saved, applied, interview, offer, and rejected statuses.
 - See a dashboard with totals and recent jobs.
 
 ## App Flow
