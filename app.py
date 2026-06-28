@@ -1,3 +1,4 @@
+import datetime
 import sqlite3
 from pathlib import Path
 
@@ -121,11 +122,14 @@ def dashboard():
     ).fetchall()
     connection.close()
 
+    today_date = datetime.date.today().isoformat()
+
     return render_template(
         "dashboard.html",
         total_jobs=total_jobs,
         status_counts=status_counts,
         recent_jobs=recent_jobs,
+        today_date=today_date,
     )
 
 
@@ -159,12 +163,15 @@ def jobs():
 
     connection.close()
 
+    today_date = datetime.date.today().isoformat()
+
     return render_template(
         "jobs.html",
         jobs=all_jobs,
         selected_status=selected_status,
         search_query=search_query,
         statuses=statuses,
+        today_date=today_date,
     )
 
 

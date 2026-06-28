@@ -57,7 +57,12 @@
                     <a class="job-link" href="{{ job.website }}" target="_blank" rel="noreferrer">Company website</a>
                   {% endif %}
                   {% if job.deadline %}
-                    <p class="deadline">Deadline: {{ job.deadline }}</p>
+                    <p class="deadline">
+                      Deadline: {{ job.deadline }}
+                      {% if job.deadline < today_date and job.status in ['Saved', 'Applied'] %}
+                        <span class="overdue-label">Overdue</span>
+                      {% endif %}
+                    </p>
                   {% endif %}
                   {% if job.notes %}
                     <p class="mini-note">{{ job.notes }}</p>

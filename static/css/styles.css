@@ -303,6 +303,19 @@ h1 {
   font-weight: 700;
 }
 
+.overdue-label {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  color: #b42318;
+  background: #fff1f0;
+  border: 1px solid #ffd1cc;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .job-actions {
   display: flex;
   align-items: center;
