@@ -28,6 +28,9 @@
           <label for="location">Location</label>
           <input id="location" name="location" type="text" value="{{ job.location or '' }}">
 
+          <label for="website">Company website</label>
+          <input id="website" name="website" type="url" value="{{ job.website or '' }}">
+
           <label for="status">Status</label>
           <select id="status" name="status">
             <option value="Saved" {% if job.status == "Saved" %}selected{% endif %}>Saved</option>

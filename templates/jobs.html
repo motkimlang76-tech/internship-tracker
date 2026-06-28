@@ -61,6 +61,9 @@
                 <h2>{{ job.company }}</h2>
                 <p>{{ job.role }}</p>
                 <p>{{ job.location or "No location yet" }}</p>
+                {% if job.website %}
+                  <a class="job-link" href="{{ job.website }}" target="_blank" rel="noreferrer">Company website</a>
+                {% endif %}
                 {% if job.deadline %}
                   <p class="deadline">Deadline: {{ job.deadline }}</p>
                 {% endif %}

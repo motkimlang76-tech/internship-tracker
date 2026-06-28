@@ -23,6 +23,7 @@ def init_db():
             company TEXT NOT NULL,
             role TEXT NOT NULL,
             location TEXT,
+            website TEXT,
             status TEXT NOT NULL,
             deadline TEXT,
             notes TEXT,
@@ -39,6 +40,9 @@ def init_db():
 
     if "deadline" not in column_names:
         connection.execute("ALTER TABLE jobs ADD COLUMN deadline TEXT")
+
+    if "website" not in column_names:
+        connection.execute("ALTER TABLE jobs ADD COLUMN website TEXT")
 
     connection.commit()
     connection.close()
@@ -128,6 +132,7 @@ def new_job():
         company = request.form.get("company", "").strip()
         role = request.form.get("role", "").strip()
         location = request.form.get("location", "").strip()
+        website = request.form.get("website", "").strip()
         status = request.form.get("status", "Saved").strip()
         deadline = request.form.get("deadline", "").strip()
         notes = request.form.get("notes", "").strip()
@@ -135,10 +140,10 @@ def new_job():
         connection = get_db_connection()
         connection.execute(
             """
-            INSERT INTO jobs (company, role, location, status, deadline, notes)
-            VALUES (?, ?, ?, ?, ?, ?)
+            INSERT INTO jobs (company, role, location, website, status, deadline, notes)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
             """,
-            (company, role, location, status, deadline, notes),
+            (company, role, location, website, status, deadline, notes),
         )
         connection.commit()
         connection.close()
@@ -163,6 +168,7 @@ def edit_job(job_id):
         company = request.form.get("company", "").strip()
         role = request.form.get("role", "").strip()
         location = request.form.get("location", "").strip()
+        website = request.form.get("website", "").strip()
         status = request.form.get("status", "Saved").strip()
         deadline = request.form.get("deadline", "").strip()
         notes = request.form.get("notes", "").strip()
@@ -170,10 +176,10 @@ def edit_job(job_id):
         connection.execute(
             """
             UPDATE jobs
-            SET company = ?, role = ?, location = ?, status = ?, deadline = ?, notes = ?
+            SET company = ?, role = ?, location = ?, website = ?, status = ?, deadline = ?, notes = ?
             WHERE id = ?
             """,
-            (company, role, location, status, deadline, notes, job_id),
+            (company, role, location, website, status, deadline, notes, job_id),
         )
         connection.commit()
         connection.close()

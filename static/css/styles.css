@@ -275,6 +275,18 @@ h1 {
   font-style: italic;
 }
 
+.job-link {
+  display: inline-flex;
+  margin-top: 6px;
+  color: #315fcb;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.job-link:hover {
+  text-decoration: underline;
+}
+
 .deadline {
   color: #8a5b00;
   font-weight: 700;
