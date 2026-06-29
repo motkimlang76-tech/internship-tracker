@@ -61,6 +61,15 @@
             placeholder="https://example.com"
           >
 
+          <label for="salary">Salary</label>
+          <input
+            id="salary"
+            name="salary"
+            type="text"
+            value="{{ form_data.salary }}"
+            placeholder="Example: $300/month or Negotiable"
+          >
+
           <label for="status">Status</label>
           <select id="status" name="status">
             {% for status in statuses %}

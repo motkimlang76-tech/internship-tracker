@@ -57,6 +57,14 @@
             value="{{ job.website or '' }}"
           >
 
+          <label for="salary">Salary</label>
+          <input
+            id="salary"
+            name="salary"
+            type="text"
+            value="{{ job.salary or '' }}"
+          >
+
           <label for="status">Status</label>
           <select id="status" name="status">
             {% for status in statuses %}

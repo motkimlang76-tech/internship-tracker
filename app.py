@@ -26,6 +26,7 @@ def init_db():
             role TEXT NOT NULL,
             location TEXT,
             website TEXT,
+            salary TEXT,
             status TEXT NOT NULL,
             deadline TEXT,
             notes TEXT,
@@ -46,6 +47,9 @@ def init_db():
     if "website" not in column_names:
         connection.execute("ALTER TABLE jobs ADD COLUMN website TEXT")
 
+    if "salary" not in column_names:
+        connection.execute("ALTER TABLE jobs ADD COLUMN salary TEXT")
+
     connection.commit()
     connection.close()
 
@@ -59,6 +63,7 @@ def empty_job_form():
         "role": "",
         "location": "",
         "website": "",
+        "salary": "",
         "status": "Saved",
         "deadline": "",
         "notes": "",
@@ -79,6 +84,7 @@ def get_job_form_data():
         "role": request.form.get("role", "").strip(),
         "location": request.form.get("location", "").strip(),
         "website": website,
+        "salary": request.form.get("salary", "").strip(),
         "status": status,
         "deadline": request.form.get("deadline", "").strip(),
         "notes": request.form.get("notes", "").strip(),
@@ -192,14 +198,17 @@ def new_job():
         connection = get_db_connection()
         connection.execute(
             """
-            INSERT INTO jobs (company, role, location, website, status, deadline, notes)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO jobs (
+                company, role, location, website, salary, status, deadline, notes
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (
                 form_data["company"],
                 form_data["role"],
                 form_data["location"],
                 form_data["website"],
+                form_data["salary"],
                 form_data["status"],
                 form_data["deadline"],
                 form_data["notes"],
@@ -245,7 +254,14 @@ def edit_job(job_id):
         connection.execute(
             """
             UPDATE jobs
-            SET company = ?, role = ?, location = ?, website = ?, status = ?, deadline = ?, notes = ?
+            SET company = ?,
+                role = ?,
+                location = ?,
+                website = ?,
+                salary = ?,
+                status = ?,
+                deadline = ?,
+                notes = ?
             WHERE id = ?
             """,
             (
@@ -253,6 +269,7 @@ def edit_job(job_id):
                 form_data["role"],
                 form_data["location"],
                 form_data["website"],
+                form_data["salary"],
                 form_data["status"],
                 form_data["deadline"],
                 form_data["notes"],
